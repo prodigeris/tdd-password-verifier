@@ -35,7 +35,6 @@ class Validator
             }
         }
 
-        
         return new ValidationResult($count > $this->shouldSatisfyAtLeastNumberOfRules, $fails);
     }
 }
