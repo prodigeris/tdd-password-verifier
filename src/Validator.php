@@ -23,7 +23,7 @@ class Validator
         $this->shouldSatisfyAtLeastNumberOfRules = $shouldSatisfyAtLeastNumberOfRules;
     }
 
-    public function verify(mixed $variable): array
+    public function verify(mixed $variable): ValidationResult
     {
         $count = 0;
         $fails = [];
@@ -35,9 +35,7 @@ class Validator
             }
         }
 
-        return [
-            'passes' => $count > $this->shouldSatisfyAtLeastNumberOfRules,
-            'fails' => $fails,
-        ];
+        
+        return new ValidationResult($count > $this->shouldSatisfyAtLeastNumberOfRules, $fails);
     }
 }

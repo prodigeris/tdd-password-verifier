@@ -38,44 +38,44 @@ class PasswordVerifierTest extends TestCase
     public function test_password_should_throw_exception_when_password_is_shorter_than_8_characters(): void
     {
         $result = $this->passwordVerifier->verify(self::SHORT_PASSWORD);
-        self::assertContains(MinLength::class, $result['fails']);
+        self::assertContains(MinLength::class, $result->getFails());
     }
 
 
     public function test_password_should_not_throw_any_exception_when_password_is_valid(): void
     {
         $result = $this->passwordVerifier->verify(self::VALID_PASSWORD);
-        $this->assertTrue($result['passes']);
+        $this->assertTrue($result->passes());
     }
 
     public function test_password_should_throw_exception_when_password_is_empty(): void
     {
         $result = $this->passwordVerifier->verify(self::EMPTY_PASSWORD);
-        self::assertContains(EmptyRule::class, $result['fails']);
+        self::assertContains(EmptyRule::class, $result->getFails());
     }
 
     public function test_password_should_throw_exception_when_password_doesnt_have_uppercase_letter(): void
     {
         $result = $this->passwordVerifier->verify(self::PASSWORD_MISSING_UPPERCASE);
-        self::assertContains(MustHaveUppercaseRule::class, $result['fails']);
+        self::assertContains(MustHaveUppercaseRule::class, $result->getFails());
     }
 
     public function test_password_should_throw_exception_when_password_doesnt_have_lowercase_letter(): void
     {
         $result = $this->passwordVerifier->verify(self::PASSWORD_MISSING_LOWERCASE);
-        self::assertContains(MustHaveLowercaseRule::class, $result['fails']);
+        self::assertContains(MustHaveLowercaseRule::class, $result->getFails());
 
     }
 
     public function test_password_should_throw_exception_when_password_doesnt_have_number(): void
     {
         $result = $this->passwordVerifier->verify(self::PASSWORD_MISSING_NUMBER);
-        self::assertContains(MustHaveNumberRule::class, $result['fails']);
+        self::assertContains(MustHaveNumberRule::class, $result->getFails());
     }
 
     public function test_password_should_return_true_when_at_least_3_rules_passes(): void
     {
         $result = $this->passwordVerifier->verify(self::PASSWORD_WITH_AT_LEAST_3_RULES);
-        self::assertTrue($result['passes']);
+        self::assertTrue($result->passes());
     }
 }
