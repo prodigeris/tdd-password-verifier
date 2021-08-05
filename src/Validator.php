@@ -12,13 +12,15 @@ class Validator
      * @var ValidationRuleInterface[]
      */
     private array $rules;
+    private int $shouldSatisfyAtLeastNumberOfRules;
 
     /**
      * @param ValidationRuleInterface[] $rules
      */
-    public function __construct(ValidationRuleInterface ...$rules)
+    public function __construct(int $shouldSatisfyAtLeastNumberOfRules, ValidationRuleInterface ...$rules)
     {
         $this->rules = $rules;
+        $this->shouldSatisfyAtLeastNumberOfRules = $shouldSatisfyAtLeastNumberOfRules;
     }
 
     public function verify(mixed $variable): array
@@ -34,7 +36,7 @@ class Validator
         }
 
         return [
-            'passes' => $count > 3,
+            'passes' => $count > $this->shouldSatisfyAtLeastNumberOfRules,
             'fails' => $fails,
         ];
     }

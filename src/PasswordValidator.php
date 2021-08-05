@@ -12,9 +12,12 @@ use TDD\Rules\MustHaveUppercaseRule;
 
 class PasswordValidator extends Validator
 {
+    private const MIN_RULES_SATISFIES = 3;
+
     public function __construct()
     {
         parent::__construct(
+            self::MIN_RULES_SATISFIES,
             new EmptyRule(),
             new MinLength(8),
             new MustHaveUppercaseRule(),
