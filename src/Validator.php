@@ -21,13 +21,21 @@ class Validator
         $this->rules = $rules;
     }
 
-    public function verify(mixed $variable): bool
+    public function verify(mixed $variable): array
     {
-        foreach($this->rules as $rule) {
-            if(!($rule->validate($variable))){
-                return false;
+        $count = 0;
+        $fails = [];
+        foreach ($this->rules as $rule) {
+            if ($rule->validate($variable)) {
+                $count++;
+            } else {
+                $fails[] = get_class($rule);
             }
         }
-        return true;
+
+        return [
+            'passes' => $count > 3,
+            'fails' => $fails,
+        ];
     }
 }
