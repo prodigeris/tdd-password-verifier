@@ -10,10 +10,11 @@ use TDD\RuleMissingUppercaseException;
 
 class MustHaveNumberRule implements ValidationRuleInterface
 {
-    public function validate(mixed $var): void
+    public function validate(mixed $var): bool
     {
         if(!preg_match('/\d/', $var)) {
-            throw new RuleMissingNumberException();
+            return false;
         }
+        return true;
     }
 }

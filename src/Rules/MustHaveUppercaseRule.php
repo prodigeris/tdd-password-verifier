@@ -8,10 +8,11 @@ use TDD\RuleMissingUppercaseException;
 
 class MustHaveUppercaseRule implements ValidationRuleInterface
 {
-    public function validate(mixed $var): void
+    public function validate(mixed $var): bool
     {
         if(!preg_match('/[A-Z]/', $var)) {
-            throw new RuleMissingUppercaseException();
+            return false;
         }
+        return true;
     }
 }

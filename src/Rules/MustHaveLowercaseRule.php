@@ -8,10 +8,11 @@ use TDD\RuleMissingLowercaseException;
 
 class MustHaveLowercaseRule implements ValidationRuleInterface
 {
-    public function validate(mixed $var): void
+    public function validate(mixed $var): bool
     {
         if(!preg_match('/[a-z]/', $var)) {
-            throw new RuleMissingLowercaseException();
+            return false;
         }
+        return true;
     }
 }

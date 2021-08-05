@@ -21,10 +21,13 @@ class Validator
         $this->rules = $rules;
     }
 
-    public function verify(mixed $variable): void
+    public function verify(mixed $variable): bool
     {
         foreach($this->rules as $rule) {
-            $rule->validate($variable);
+            if(!($rule->validate($variable))){
+                return false;
+            }
         }
+        return true;
     }
 }

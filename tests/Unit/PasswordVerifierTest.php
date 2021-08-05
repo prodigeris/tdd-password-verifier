@@ -40,38 +40,38 @@ class PasswordVerifierTest extends TestCase
 
     public function test_password_should_throw_exception_when_password_is_shorter_than_8_characters(): void
     {
-        $this->expectException(RuleTooShortException::class);
-        $this->passwordVerifier->verify(self::SHORT_PASSWORD);
+        $result = $this->passwordVerifier->verify(self::SHORT_PASSWORD);
+        self::assertFalse($result);
     }
 
     public function test_password_should_not_throw_any_exception_when_password_is_valid(): void
     {
-        $this->passwordVerifier->verify(self::VALID_PASSWORD);
+        $result = $this->passwordVerifier->verify(self::VALID_PASSWORD);
 
-        $this->assertTrue(true);
+        $this->assertTrue($result);
     }
 
     public function test_password_should_throw_exception_when_password_is_empty(): void
     {
-        $this->expectException(RuleEmptyException::class);
-        $this->passwordVerifier->verify(self::EMPTY_PASSWORD);
+        $result = $this->passwordVerifier->verify(self::EMPTY_PASSWORD);
+        self::assertFalse($result);
     }
 
     public function test_password_should_throw_exception_when_password_doesnt_have_uppercase_letter(): void
     {
-        $this->expectException(RuleMissingUppercaseException::class);
-        $this->passwordVerifier->verify(self::PASSWORD_MISSING_UPPERCASE);
+        $result = $this->passwordVerifier->verify(self::PASSWORD_MISSING_UPPERCASE);
+        self::assertFalse($result);
     }
 
     public function test_password_should_throw_exception_when_password_doesnt_have_lowercase_letter(): void
     {
-        $this->expectException(RuleMissingLowercaseException::class);
-        $this->passwordVerifier->verify(self::PASSWORD_MISSING_LOWERCASE);
+        $result = $this->passwordVerifier->verify(self::PASSWORD_MISSING_LOWERCASE);
+        self::assertFalse($result);
     }
 
     public function test_password_should_throw_exception_when_password_doesnt_have_number(): void
     {
-        $this->expectException(RuleMissingNumberException::class);
-        $this->passwordVerifier->verify(self::PASSWORD_MISSING_NUMBER);
+        $result = $this->passwordVerifier->verify(self::PASSWORD_MISSING_NUMBER);
+        self::assertFalse($result);
     }
 }

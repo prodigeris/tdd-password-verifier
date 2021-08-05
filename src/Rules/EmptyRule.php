@@ -8,10 +8,11 @@ use TDD\RuleEmptyException;
 
 class EmptyRule implements ValidationRuleInterface
 {
-    public function validate(mixed $var): void
+    public function validate(mixed $var): bool
     {
         if(!$var) {
-            throw new RuleEmptyException();
+            return false;
         }
+        return true;
     }
 }

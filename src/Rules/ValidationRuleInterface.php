@@ -6,5 +6,5 @@ namespace TDD\Rules;
 
 interface ValidationRuleInterface
 {
-    public function validate(mixed $var): void;
+    public function validate(mixed $var): bool;
 }

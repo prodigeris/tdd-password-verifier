@@ -18,10 +18,11 @@ class MinLength implements ValidationRuleInterface
         $this->minLength = $minLength;
     }
 
-    public function validate(mixed $var): void
+    public function validate(mixed $var): bool
     {
         if(strlen($var) < $this->minLength) {
-            throw new RuleTooShortException();
+            return false;
         }
+        return true;
     }
 }
